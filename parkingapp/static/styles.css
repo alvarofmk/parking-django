@@ -1,0 +1,30 @@
+.indexContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+.indexContainer div{
+    height: 100px;
+    width: 100px;
+    background-color: rgb(196, 196, 196);
+    border-radius: 4px;
+}
+.container{
+    width: 70%;
+    margin: auto;
+    margin-top: 20px;
+}
+.containerPlazas{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+.estadoPlaza{
+    height: 100px;
+    width: 80px;
+    background-color: rgb(177, 177, 177);
+    border-radius: 4px;
+}

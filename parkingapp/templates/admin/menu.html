@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h1>Bienvenido</h1>
+            <p>Hay un total de {{nPlazasLibres}} plazas libres, lo que representa un {{ocupacion}}% de ocupacion.</p>
+        </div>
+        <button onclick="window.location.href='/administrator/estado';">
+            Ver el estado de todas las plazas
+        </button>
+        <button onclick="window.location.href='/administrator/facturacion';">
+            Facturación
+        </button>
+        <button onclick="window.location.href='/administrator/abonados';">
+            Abonados
+        </button>
+    </div>
+</body>
+</html>
