@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h1>Menú abonados</h1>
+        </div>
+        <button onclick="window.location.href='/administrator/abonados/alta';">
+            Alta
+        </button>
+        <button onclick="window.location.href='/administrator/abonados/caducidad';">
+            Caducidad
+        </button>
+        <table>
+            <thead>
+                <tr>
+                    <th>DNI</th>
+                    <th>Nombre y apellidos</th>
+                    <th>Matricula</th>
+                    <th>Tipo de abono</th>
+                    <th>Fecha fin suscripcion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for abonado in listaAbonados %}
+                <tr>
+                    <td>{{abonado.dni}}</td>
+                    <td>{{abonado.nombre}} {{abonado.apellidos}}</td>
+                    <td>{{abonado.matricula}}</td>
+                    <td>{{abonado.tipoAbono.nombre}}</td>
+                    <td>{{abonado.fechaCancelacion}}</td>
+                    <td><button onclick="window.location.href='/administrator/abonados/modificar/{{abonado.matricula}}';">
+                        Modificación
+                    </button></td>
+                    <td><button onclick="window.location.href='/administrator/abonados/baja/{{abonado.matricula}}';">
+                        Baja
+                    </button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

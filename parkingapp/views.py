@@ -48,3 +48,24 @@ def consultarFacturacion(request):
         'form' : form,
         'ningunResultado' : ningunResultado
     })
+
+def gestionAbonados(request):
+    listaAbonados = []
+    if request.method == 'POST':
+        form = FacturacionForm(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        listaAbonados = Abonado.objects.all()
+    return render(request, 'admin/abonados.html', {
+        'listaAbonados': listaAbonados,
+    })
+
+def formularioAbonado(request, matricula):
+    return HttpResponse()
+
+def bajaAbonado(request, matricula):
+    return HttpResponse()
+
+def caducidadAbonados(request):
+    return HttpResponse()
