@@ -11,5 +11,6 @@ urlpatterns = [
     path('administrator/abonados', views.gestionAbonados, name='abonados'),
     path('administrator/abonados/formulario/', views.formularioAbonado, {'matricula': None}, name='abonados-alta'),
     path('administrator/abonados/formulario/<slug:matricula>', views.formularioAbonado, name='abonados-modificacion'),
+    path('administrator/abonados/aviso/<slug:matricula>', views.avisoBaja, name='abonados-aviso'),
     path('administrator/abonados/baja/<slug:matricula>', views.bajaAbonado, name='abonados-baja'),
 ]

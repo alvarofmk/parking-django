@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="{% static '/styles.css' %}">
 </head>
 <body>
-    <form action="/administrator/abonados/formulario/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit" disabled>
-    </form>
+    <div class="container">
+        <form action="/administrator/abonados/formulario/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit" disabled>
+        </form>
+    </div>
 </body>
 </html>

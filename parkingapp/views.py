@@ -7,6 +7,7 @@ from django.shortcuts import render
 import random
 import pdb;
 from datetime import timedelta
+from django.shortcuts import redirect
 
 
 def index(request):
@@ -111,8 +112,22 @@ def formularioAbonado(request, matricula):
         'form' : form,
     })
 
+def avisoBaja(request, matricula):
+    abonado = Abonado.objects.get(pk=matricula)
+    template = loader.get_template('admin/baja.html')
+    context = {
+        'abonado': abonado
+    }
+    return HttpResponse(template.render(context))
+
 def bajaAbonado(request, matricula):
-    return HttpResponse()
+    abonado = Abonado.objects.get(pk=matricula)
+    abonado.activo = False
+    abonado.plaza.estado = Plaza.estadoChoices.LIBRE
+    abonado.fechaCancelacion = timezone.now()
+    abonado.save()
+    abonado.plaza.save()
+    return redirect(gestionAbonados)
 
 def caducidadAbonados(request):
     return HttpResponse()

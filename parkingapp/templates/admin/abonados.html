@@ -27,6 +27,7 @@
                     <th>Matricula</th>
                     <th>Tipo de abono</th>
                     <th>Fecha fin suscripcion</th>
+                    <th>Activo</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,10 +38,11 @@
                     <td>{{abonado.matricula}}</td>
                     <td>{{abonado.tipoAbono.nombre}}</td>
                     <td>{{abonado.fechaCancelacion}}</td>
+                    <td>{{abonado.activo}}</td>
                     <td><button onclick="window.location.href='/administrator/abonados/formulario/{{abonado.matricula}}';">
                         Modificación
                     </button></td>
-                    <td><button onclick="window.location.href='/administrator/abonados/baja/{{abonado.matricula}}';">
+                    <td><button onclick="window.location.href='/administrator/abonados/aviso/{{abonado.matricula}}';">
                         Baja
                     </button></td>
                 </tr>
