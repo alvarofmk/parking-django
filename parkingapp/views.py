@@ -1,9 +1,12 @@
-from datetime import timedelta
+from django.utils import timezone
 from django.http import HttpResponse
 from django.template import loader
 from .models import *
-from .forms.forms import FacturacionForm
+from .forms.forms import FacturacionForm, AbonadoForm
 from django.shortcuts import render
+import random
+import pdb;
+from datetime import timedelta
 
 
 def index(request):
@@ -51,18 +54,62 @@ def consultarFacturacion(request):
 
 def gestionAbonados(request):
     listaAbonados = []
+    
     if request.method == 'POST':
         form = FacturacionForm(request.POST)
         if form.is_valid():
             pass
     else:
-        listaAbonados = Abonado.objects.all()
+        ultimos = request.GET.get('ultimos', '')
+        if ultimos == 'true':
+            listaAbonados = Abonado.objects.filter(fechaCancelacion__gte=timezone.now()).filter(fechaCancelacion__lte=timezone.now() + timedelta(days=10))
+        else:
+            listaAbonados = Abonado.objects.all()
     return render(request, 'admin/abonados.html', {
         'listaAbonados': listaAbonados,
     })
 
 def formularioAbonado(request, matricula):
-    return HttpResponse()
+    form = AbonadoForm()
+    if request.method == 'POST':
+        form = AbonadoForm(request.POST)
+        if form.is_valid():
+            
+            fechaCan = timezone.now() + timedelta(days=form.cleaned_data['tipoAbono'].duracion*30)
+            tiposPlaza = TipoPlaza.objects.get(pk=form.cleaned_data['tipoVehiculo'])
+            plazas = Plaza.objects.filter(estado='LI').all()
+    
+            noEncontrado = True
+            i=0
+
+            while i < len(plazas) and noEncontrado:
+                if plazas[i].tipoPlaza == tiposPlaza:
+                    noEncontrado = False
+                    plaza = plazas[i]
+
+            newAbonado =Abonado(form.cleaned_data['matricula'],
+            form.cleaned_data['tipoVehiculo'],
+            form.cleaned_data['dni'],
+            form.cleaned_data['nombre'],
+            form.cleaned_data['apellidos'],
+            form.cleaned_data['email'],
+            form.cleaned_data['tarjeta'],
+            timezone.now(),
+            fechaCan,
+            True,
+            random.randint(100000, 999999),
+            plaza,
+            form.cleaned_data['matricula'],
+            form.cleaned_data['tipoAbono']
+            )
+            
+            newAbonado.save()
+            plaza.estado=Plaza.estadoChoices.ABONOLIBRE
+            plaza.save()
+
+    return render(request, 'admin/formAbonados.html', {
+        'form' : form,
+    })
 
 def bajaAbonado(request, matricula):
     return HttpResponse()

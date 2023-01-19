@@ -13,11 +13,11 @@
         <div>
             <h1>Menú abonados</h1>
         </div>
-        <button onclick="window.location.href='/administrator/abonados/alta';">
+        <button onclick="window.location.href='/administrator/abonados/formulario/';">
             Alta
         </button>
-        <button onclick="window.location.href='/administrator/abonados/caducidad';">
-            Caducidad
+        <button onclick="window.location.href='/administrator/abonados?ultimos=true';">
+            Ultimos 10 dias de abono
         </button>
         <table>
             <thead>
@@ -37,7 +37,7 @@
                     <td>{{abonado.matricula}}</td>
                     <td>{{abonado.tipoAbono.nombre}}</td>
                     <td>{{abonado.fechaCancelacion}}</td>
-                    <td><button onclick="window.location.href='/administrator/abonados/modificar/{{abonado.matricula}}';">
+                    <td><button onclick="window.location.href='/administrator/abonados/formulario/{{abonado.matricula}}';">
                         Modificación
                     </button></td>
                     <td><button onclick="window.location.href='/administrator/abonados/baja/{{abonado.matricula}}';">
